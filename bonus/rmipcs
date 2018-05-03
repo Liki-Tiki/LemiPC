@@ -1,0 +1,18 @@
+#!/usr/bin/python3.4
+import os
+
+def getTab(command):
+    res = os.popen(command)
+    tab = res.read().split('\n')[3:-2]
+    return tab
+
+def remove(tab, command):
+    for line in tab:
+        elem = line.split(' ')
+        if (elem[0] != "0x00000000"):
+            os.system(command + ' ' + elem[1])
+            print('deleting ' + elem[1])
+
+remove(getTab('ipcs -m'), 'ipcrm shm')
+remove(getTab('ipcs -s'), 'ipcrm sem')
+remove(getTab('ipcs -q'), 'ipcrm msg')

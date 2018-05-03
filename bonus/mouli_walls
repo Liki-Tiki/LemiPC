@@ -1,0 +1,9 @@
+#!/bin/bash
+make ipcs
+for ((x=1; x <= 20; ++x))
+do
+    for ((y=1; y <= 10; ++y))
+    do
+	     ./lemipc . $x -wall  &
+    done
+done
